@@ -1,0 +1,176 @@
+PROGRAM 2
+
+ Program in to implement Binary Search. 
+i) Using linked list
+ 
+SOURCE CODE
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<conio.h>
+#include<alloc.h>
+struct NODE{
+  int data;
+  struct NODE *link;
+ };  NODE *Head;
+
+
+  void  insert(){
+  int x;
+  NODE *N,*ptr;
+  ptr=Head;
+  printf("\n enter the number");
+  scanf("%d",&x);
+  N=(NODE*)malloc(sizeof(struct NODE));
+  N->data=x;
+  if(Head==NULL)
+  {
+  N->link=NULL;
+  Head=N;}
+  else{
+  while(ptr->link!=NULL)
+  {
+  ptr=ptr->link;
+  }
+    ptr->link=N;
+  N->link=NULL;
+}
+}
+void traverse(){
+struct NODE *ptr;
+ptr=Head;
+if(Head==NULL)
+{
+   printf("\n list is empty");
+   getch();
+   }
+else{
+     while(ptr!=NULL) {
+     printf("\n");
+     printf("\n %d->\t",ptr->data);
+     ptr=ptr->link;
+ }
+ getch();
+ }
+ }
+ void search()
+ {
+  struct NODE*ptr;
+  ptr=Head;
+  int MID,t,l=0,u=4,c=0,key;
+      if(Head==NULL)
+  {
+   printf("\n list is empty");
+   }
+   else{
+    printf("\n enter number to be search");
+   scanf("%d",&key);
+  while(ptr!=NULL)
+ {
+  ptr=ptr->link;
+  u++;
+  }
+ do{
+ t=0;
+ ptr=Head;
+ MID=(l+u)/2;
+ while(t!=MID-1){
+ ptr=ptr->link;
+ t++;
+ }
+
+if(ptr->data==key)
+{
+   printf("\n %d is found at %d",key,MID);
+   c=1;
+
+  }
+  else if(key>ptr->data){
+      l=MID+1;
+      }
+      else{
+      u=MID-1;
+      }
+     } while(l<=u&&c==0);
+      if(c==0){
+      printf("Value not found");
+      }
+      }
+      getch();
+      }
+
+   void main(){
+   int d;
+  L: clrscr();
+  printf("1. Insertion\n");
+  printf("2. Traverse\n");
+  printf("3. Search\n");
+  printf("4. Exit\n");
+  printf("Enter your choice");
+  scanf("%d",&d);
+
+  switch(d){
+     case 1:   insert();
+		goto L;
+     case 2:   traverse();
+		goto L;
+     case 3:   search();
+		goto L;
+     case 4:   exit(0);
+     default:
+     printf("Invalid choice");
+     getch();
+     goto L;
+     }
+}
+
+
+
+
+(ii) Using Array
+
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+void main()
+{
+clrscr();
+ int MID,t,l=0,u=4,i,flag,false,x,true,a[5];
+   printf("\n enter the elements of array");
+   for(i=0;i<5;i++)
+   scanf("%d",&a[i]);
+   printf("\n enter the  element to search");
+   scanf("%d",&x);
+   flag=false;
+   while((flag==false)&&(l<u))
+  {
+    MID=(l+u)/2;
+
+    if(x==a[MID])
+    {  printf("\nSuccessful");
+       t=MID;
+       printf("\n  element found at  %d",t);
+       flag=true;
+       break;
+    }
+     else
+     {
+	if(x<a[MID])
+	{
+	 u= MID-1;
+	}
+	else
+	{
+	   l=MID+1;
+	}
+    }
+   }
+    if(x!=a[MID])
+    {
+      printf("\n unsuccessfull");
+
+    }
+    getch();
+}

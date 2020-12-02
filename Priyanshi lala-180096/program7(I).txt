@@ -1,0 +1,83 @@
+Question: Write a program for Array Implementation of Quick Sort.
+
+Algorithm:
+Step 1: partition(a,p,r)
+Step 2: x=a[r]
+Step 3:	i=p-1 
+Step 4: for(j=p to r-1)do
+Step 5: 	if(a[j]<=x) then
+Step 6:			i=i+1
+Step 7:			swap(a[i],a[j])
+Step 8:		end if
+Step 9:	end for
+Step 10: swap(a[i+1],a[r])
+Step 11: return i+1
+Step 12:stop
+Step 13: quick_sort(a,p,r)
+Step 14: if(p<r)
+Step 15: 	q=partition(a,p,r)
+Step 16: 	quick_sort(a,p,q-1)
+Step 17: 	quick_sort(a,q+1,r)
+Step 18: end if
+Step 19: stop
+Step 20: swap(int x, int y)
+Step 21: temp=x
+Step 22: x=y
+Step 23: y=temp
+Step 24: stop
+
+Program:
+#include <stdio.h>
+#include<conio.h>
+void quick_sort(int[],int,int);
+int partition(int[],int,int);
+void main()
+{       clrscr();
+	int a[50],n,i;
+	printf("Enter the no. elements you want to sort:");
+	scanf("%d",&n);
+	printf("\nEnter array elements:");
+	for(i=0;i<n;i++)
+		scanf("%d",&a[i]);
+	quick_sort(a,0,n-1);
+	printf("\nArray after sorting:");
+	for(i=0;i<n;i++)
+		printf("%d ",a[i]);
+	getch();
+}
+void quick_sort(int a[],int l,int u)
+{
+	int j;
+	if(l<u)
+	{
+		j=partition(a,l,u);
+		quick_sort(a,l,j-1);
+		quick_sort(a,j+1,u);
+	}
+}
+int partition(int a[],int l,int u)
+{
+	int v,i,j,temp;
+	v=a[l];
+	i=l;
+	j=u+1;
+	do
+	{
+		do
+			i++;
+		while(a[i]<v&&i<=u);
+		do
+			j--;
+		while(v<a[j]);
+
+		if(i<j)
+		{
+			temp=a[i];
+			a[i]=a[j];
+			a[j]=temp;
+		}
+	}while(i<j);
+	a[l]=a[j];
+	a[j]=v;
+	return(j);
+}
